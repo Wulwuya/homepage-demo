@@ -1,0 +1,393 @@
+ <!DOCTYPE html>
+  <html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="张三 · 经济学本科在读 · 个人主页">
+  <title>张三 · 经济学本科在读</title>
+  <style>
+    :root {
+      --navy: #1F4E79;
+      --navy-deep: #16395A;
+      --cream: #FAF7F0;
+      --cream-deep: #F2ECE1;
+      --ink: #22303D;
+      --ink-soft: #5C6B7A;
+      --ink-faint: #98A3AE;
+      --line: #E3DCCE;
+      --accent: #B08A4A;
+
+      --wrap: 820px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+                   "Source Han Sans SC", "Noto Sans CJK SC", sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.8;
+      padding: 0 24px 72px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap { max-width: var(--wrap); margin: 0 auto; }
+
+    /* ================= 头部 ================= */
+    header {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(158deg, #26598A 0%, var(--navy) 46%, var(--navy-deep) 100%);
+      color: var(--cream);
+      margin: 0 -24px 60px;
+      padding: 60px 24px 58px;
+    }
+
+    /* 背景装饰：一枚探出右侧的细圆环 */
+    header::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -90px;
+      width: 320px;
+      height: 320px;
+      border: 1px solid rgba(250, 247, 240, 0.10);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    /* 姓氏圆章 */
+    .monogram {
+      position: relative;
+      flex: 0 0 auto;
+      width: 84px;
+      height: 84px;
+      border: 1px solid rgba(250, 247, 240, 0.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s ease;
+    }
+
+    /* 内圈细环，做出双环的层次 */
+    .monogram::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(250, 247, 240, 0.16);
+      border-radius: 50%;
+    }
+
+    .monogram span {
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--cream);
+      transform: translateY(-1px);   /* 单字在圆内的视觉修正 */
+    }
+
+    .head:hover .monogram { border-color: rgba(250, 247, 240, 0.72); }
+
+    .ident h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      line-height: 1.3;
+    }
+
+    .ident .tagline {
+      margin-top: 9px;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      color: #BFD2E4;
+    }
+
+    .ident .rule {
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+      margin-top: 18px;
+    }
+
+    /* ================= 区块标题 ================= */
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .title h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.2em;
+      white-space: nowrap;
+    }
+
+    .title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    section { margin-bottom: 60px; }
+
+    /* 末块不留底距，页面底部由 body 的内边距收尾 */
+    section:last-of-type { margin-bottom: 0; }
+
+    /* ================= 简介 ================= */
+    .about p {
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+      line-height: 1.95;
+      margin-bottom: 16px;
+    }
+
+    .about p:last-child { margin-bottom: 0; }
+
+    .about strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ================= 项目卡片 ================= */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 26px 22px 24px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -1px -1px auto -1px;
+      height: 3px;
+      border-radius: 8px 8px 0 0;
+      background: var(--navy);
+      transform: scaleX(0.22);
+      transform-origin: left;
+      transition: transform 0.28s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #D6CDBA;
+      box-shadow: 0 10px 26px rgba(31, 78, 121, 0.10);
+    }
+
+    .card:hover::before { transform: scaleX(1); }
+
+    .card .idx {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      line-height: 1.85;
+      color: var(--ink-soft);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--cream-deep);
+    }
+
+    .tags span {
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--navy);
+      background: var(--cream-deep);
+      border-radius: 3px;
+      padding: 3px 9px;
+    }
+
+    /* ================= 联系方式 ================= */
+    .contact {
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 40px 28px 42px;
+      text-align: center;
+    }
+
+    .contact .lead {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      color: var(--ink-faint);
+      margin-bottom: 20px;
+    }
+
+    .contact .mail {
+      display: inline-block;
+      font-size: 1.12rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--navy);
+      text-decoration: none;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(31, 78, 121, 0.35);
+      word-break: break-all;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .contact .mail:hover {
+      color: var(--navy-deep);
+      border-bottom-color: var(--navy-deep);
+    }
+
+    .contact .note {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--ink-faint);
+    }
+
+    /* ================= 可访问性 ================= */
+    a:focus-visible {
+      outline: 2px solid var(--navy);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+      .card:hover { transform: none; }
+    }
+
+    /* ================= 手机端 ================= */
+    @media (max-width: 600px) {
+      body { padding: 0 18px 56px; font-size: 15px; }
+      header { margin: 0 -18px 44px; padding: 44px 18px 44px; }
+      header::after { right: -120px; width: 250px; height: 250px; }
+
+      .head { gap: 18px; }
+      .monogram { width: 66px; height: 66px; }
+      .monogram::after { inset: 4px; }
+      .monogram span { font-size: 1.6rem; }
+
+      .ident h1 { font-size: 1.5rem; letter-spacing: 0.12em; }
+      .ident .tagline { margin-top: 7px; font-size: 0.7rem; letter-spacing: 0.16em; }
+      .ident .rule { margin-top: 14px; width: 30px; }
+
+      section { margin-bottom: 46px; }
+      .cards { grid-template-columns: 1fr; gap: 14px; }
+      .card { padding: 22px 18px 20px; }
+      .contact { padding: 32px 20px 34px; }
+      .contact .mail { font-size: 1rem; }
+    }
+  </style>
+  </head>
+  <body>
+
+  <header>
+    <div class="wrap head">
+      <div class="monogram" aria-hidden="true"><span>张</span></div>
+      <div class="ident">
+        <h1>张三</h1>
+        <p class="tagline">经济学 · 本科在读</p>
+        <span class="rule"></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <section class="about">
+      <div class="title"><h2>简 介</h2></div>
+      <p>经济学专业本科生，关注数据与社会科学交叉的部分。相信复杂的经济现象可以被拆成可被检验的小问题，也相信一个好用的
+  工具能让研究省力一大半。</p>
+      <p>日常在 <strong>Python</strong> 与 <strong>R</strong>
+  之间切换，做过一些数据采集、文本清洗与可视化的课程项目。比起堆砌模型，更在意数据本身是否干净、结论是否说得清楚。</p>
+    </section>
+
+    <section>
+      <div class="title"><h2>课程项目</h2></div>
+      <div class="cards">
+
+        <div class="card">
+          <span class="idx">01</span>
+          <h3>AI 就业监测小站</h3>
+          <p>抓取主流招聘平台的岗位信息，按时间与城市汇总 AI 相关职位的需求变化，做成可按周查看的小型监测页面。</p>
+          <div class="tags">
+            <span>数据采集</span><span>可视化</span><span>Python</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="idx">02</span>
+          <h3>历时词向量可视化</h3>
+          <p>用不同年代的语料分别训练词向量，观察同一词语的含义如何随时间漂移，并投影到平面上做成可交互的图。</p>
+          <div class="tags">
+            <span>NLP</span><span>词向量</span><span>降维</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="idx">03</span>
+          <h3>判决书数据清洗</h3>
+          <p>对裁判文书文本做结构化处理：切分案由、当事人与判决结果，统一格式与缺失值，整理成可直接统计分析的表格。</p>
+          <div class="tags">
+            <span>文本清洗</span><span>正则</span><span>结构化</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="title"><h2>联系方式</h2></div>
+      <div class="contact">
+        <p class="lead">欢 迎 来 信</p>
+        <a class="mail" href="mailto:zhangsan@example.com">zhangsan@example.com</a>
+        <p class="note">课程项目、数据整理相关的问题，都欢迎交流。</p>
+      </div>
+    </section>
+
+  </div>
+
+  </body>
+  </html>
